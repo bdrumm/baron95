@@ -1,0 +1,7 @@
+{
+  "name": "About Win95 Sim",
+  "entry": "app.js",
+  "icon": "Help/Help book.ico",
+  "version": "0.1.0",
+  "description": "Displays information about this simulation."
+}

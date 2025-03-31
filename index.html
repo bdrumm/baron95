@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Win95 Simulation - Starting</title> <!-- Update title -->
+  <link rel="stylesheet" href="os/ui/styles.css">
+  <link rel="stylesheet" href="os/ui/loading.css"> <!-- Add loading screen CSS -->
+  <style>
+    /* Basic styles to prevent margin/padding issues */
+    body { margin: 0; padding: 0; overflow: hidden; background-color: #008080; /* Teal background like Win95 */ }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading-screen">
+      <div class="loading-logo"></div> <!-- This will use the startlogo.png via CSS -->
+      <div class="loading-text-container">
+          <span class="brand">Baronsoft</span><span class="product">&reg;</span><br>
+          <span class="os-name">Doors 95</span>
+      </div>
+      <div class="loading-bar-container">
+          <div class="loading-bar"></div>
+      </div>
+      <!-- Removed copyright div -->
+  </div>
+
+  <!-- Main OS UI Elements (initially hidden by loading screen) -->
+  <div id="desktop">
+    <!-- Desktop icons will be loaded here -->
+  </div>
+  <div id="taskbar">
+    <!-- Taskbar elements will be loaded here -->
+  </div>
+
+  <!-- Load Core OS -->
+  <script type="module" src="os/core.js"></script>
+</body>
+</html>

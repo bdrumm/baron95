@@ -1,0 +1,9 @@
+{
+  "id": "clippy",
+  "name": "Clippy Assistant",
+  "icon": "Help/Agent.ico", 
+  "version": "0.1",
+  "description": "A helpful, if slightly annoying, assistant.",
+  "permissions": ["createWindow", "readOSEvents"], 
+  "autostart": true 
+}

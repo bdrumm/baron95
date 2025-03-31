@@ -1,0 +1,459 @@
+/* Basic Reset & Body */
+body {
+  font-family: "Tahoma", "Geneva", sans-serif; /* Common Win95 font */
+  font-size: 12px;
+  background-color: #008080; /* Win95 Teal */
+  color: #000;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrollbars on body */
+}
+
+#desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px); /* Full height minus taskbar */
+  padding: 10px;
+  box-sizing: border-box;
+  user-select: none; /* Prevent selecting desktop text */
+}
+
+/* --- Taskbar --- */
+#taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #c0c0c0; /* Win95 Grey */
+  border-top: 2px solid #ffffff; /* White highlight */
+  box-shadow: inset 0 1px 1px #808080; /* Inner shadow */
+  z-index: 1000; /* Ensure taskbar is on top */
+  display: flex;
+  align-items: stretch; /* Stretch items vertically */
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+#start-button {
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  box-shadow: 1px 1px 1px #808080;
+  padding: 0 8px;
+  margin: 0 2px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  font-family: inherit; /* Use body font */
+}
+#start-button b {
+    font-weight: bold; /* Ensure bold */
+}
+#start-button:active {
+  border-style: inset;
+  box-shadow: none;
+  background-color: #e0e0e0;
+}
+
+
+.running-apps {
+  display: flex;
+  height: 100%;
+  margin-left: 3px;
+  flex-grow: 1; /* Take up space */
+  overflow: hidden; /* Hide overflowing buttons */
+}
+
+.taskbar-button {
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  box-shadow: 1px 1px 1px #808080;
+  padding: 0 8px; /* Adjusted padding */
+  margin: 0 2px;
+  height: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  min-width: 50px; /* Minimum width */
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-family: inherit;
+}
+
+.taskbar-button.minimized,
+.taskbar-button:active {
+  border-style: inset;
+  box-shadow: inset 1px 1px 1px #808080;
+  background-color: #e0e0e0;
+  padding: 1px 7px 0 9px; /* Adjust padding for inset look */
+}
+
+#system-tray {
+  border: 1px solid #808080; /* Inner border */
+  box-shadow: inset 1px 1px 0 #ffffff; /* Inner highlight */
+  padding: 0 5px;
+  margin-left: auto; /* Push to the right */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+#clock {
+    font-size: 11px;
+}
+
+
+/* --- Windows --- */
+.app-window {
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  min-width: 200px; /* Slightly larger min size */
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important for containing content */
+}
+
+.title-bar {
+  background: linear-gradient(to right, #000080, #1084d0); /* Win95 Title Gradient */
+  color: #ffffff;
+  padding: 2px 3px; /* Slightly adjust padding */
+  font-weight: bold;
+  font-size: 11px; /* Smaller font for title */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+  height: 18px; /* Slightly shorter */
+  box-sizing: border-box;
+  flex-shrink: 0; /* Prevent shrinking */
+  user-select: none; /* Prevent selecting title text */
+}
+
+/* Focused window style */
+.app-window.focused > .title-bar {
+   background: linear-gradient(to right, #000080, #1084d0); /* Default blue */
+}
+/* Unfocused window style */
+.app-window:not(.focused) > .title-bar {
+   background: linear-gradient(to right, #808080, #c0c0c0); /* Grey gradient */
+   color: #a0a0a0; /* Dimmer text */
+}
+
+
+.title-bar-buttons {
+    display: flex;
+}
+
+.window-button {
+  background-color: #c0c0c0;
+  border: 1px outset #ffffff; /* Use 1px borders for buttons */
+  box-shadow: 1px 1px 0 #808080;
+  font-family: "Tahoma", sans-serif; /* Use standard font for now */
+  font-size: 10px; /* Small buttons */
+  font-weight: bold;
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  margin-left: 2px;
+  cursor: pointer;
+  line-height: 12px; /* Adjust line height */
+  text-align: center;
+  display: flex; /* Center content */
+  align-items: center;
+  justify-content: center;
+}
+.window-button.close-button {
+    font-weight: bold;
+    font-size: 10px; /* Consistent size */
+    color: #000;
+}
+.window-button.minimize-button {
+    position: relative; /* For positioning underscore */
+    bottom: 1px;
+}
+.window-button.maximize-button {
+    font-size: 8px; /* Smaller square */
+}
+
+
+.window-button:active {
+  border-style: inset;
+  box-shadow: none;
+  padding-top: 1px; /* Simulate press */
+  padding-left: 1px;
+}
+
+.window-content {
+  flex-grow: 1;
+  background-color: #ffffff; /* Default white content area */
+  margin: 0; /* Remove margin */
+  border: 2px inset #ffffff; /* Sunken border */
+  box-shadow: inset 1px 1px 0 #808080;
+  overflow: auto; /* Allow scrolling */
+  /* Remove padding, let app content decide */
+  /* padding: 5px; */
+  box-sizing: border-box;
+  position: relative; /* Needed for absolute positioning inside if required by app */
+}
+
+/* Resize Handle */
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background-color: #c0c0c0; /* Match window background */
+  /* Create a grip pattern using borders or background image */
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  cursor: nwse-resize; /* Diagonal resize cursor */
+  z-index: 1; /* Above content but below title bar buttons if overlapping */
+}
+/* Hide resize handle when maximized */
+.app-window[data-is-maximized="true"] .resize-handle {
+    display: none;
+}
+/* Adjust window border/shadow when maximized */
+.app-window[data-is-maximized="true"] {
+    border: none;
+    box-shadow: none;
+}
+
+
+/* --- Desktop Icons --- */
+.desktop-icon {
+  width: 75px;
+  /* min-height: 70px; */ /* Remove min-height */
+  color: #ffffff;
+  text-align: center;
+  margin: 10px;
+  display: inline-flex; /* Use flex for better alignment */
+  flex-direction: column; /* Stack image and label */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  /* gap: 4px; */ /* Remove explicit gap */
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 11px; /* Slightly smaller font */
+  padding: 2px; /* Revert to minimal padding */
+  box-sizing: border-box;
+  border: 1px solid transparent; /* For focus/selection later */
+}
+
+.desktop-icon:hover {
+   /* Add hover effect later if desired */
+}
+
+.desktop-icon:focus,
+.desktop-icon.selected { /* Style for selection */
+  background-color: rgba(0, 0, 128, 0.5); /* Semi-transparent blue */
+  border: 1px dotted #ffffff;
+  outline: none;
+}
+
+.desktop-icon .icon-image { /* Placeholder for actual image */
+  width: 100%; /* Standard icon size */
+  height: 32px;
+  /* Remove placeholder background/border for transparency */
+  /* background-color: #ccc; */
+  /* border: 1px solid #aaa; */
+  /* margin-bottom: 4px; */ /* Ensure margin is removed */
+  background-size: contain; /* Keep image contained */
+  background-repeat: no-repeat;
+  flex-shrink: 0; /* Prevent image shrinking */
+  background-position: center; /* Center image within the div */
+  image-rendering: pixelated; /* Preserve crisp edges for pixel art icons */
+  image-rendering: crisp-edges;
+}
+
+.desktop-icon .icon-label {
+  text-align: center; /* Ensure label text is centered */
+  background-color: transparent; /* Label background */
+  padding: 1px 3px;
+  margin-top: 4px; /* Add explicit top margin */
+  word-wrap: break-word; /* Allow wrapping */
+  max-height: 2.4em; /* Limit label height */
+  line-height: 1.2em;
+}
+
+/* Style for selected label text */
+.desktop-icon:focus .icon-label,
+.desktop-icon.selected .icon-label {
+   background-color: #000080; /* Blue background when selected */
+   color: #ffffff;
+}
+
+
+/* --- Start Menu --- */
+#start-menu {
+    position: absolute;
+    bottom: 30px; /* Position above taskbar */
+    left: 0;
+    /* width: 180px; /* Let content determine width */
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 1100; /* Above taskbar */
+    display: none; /* Hidden by default */
+    flex-direction: row; /* Layout sidebar and main */
+    padding: 0; /* Remove padding, handle internally */
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.start-menu-sidebar {
+    width: 24px; /* Width for vertical text */
+    background-color: #808080; /* Darker grey */
+    writing-mode: vertical-lr; /* Vertical text */
+    transform: rotate(180deg); /* Flip text direction */
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #c0c0c0; /* Light grey text */
+    border-right: 2px solid #000; /* Separator */
+    box-shadow: inset -1px 0 0 #fff;
+    font-size: 16px; /* Larger text */
+    /* Placeholder text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.start-menu-sidebar::before {
+    content: "Win95 Sim"; /* Example text */
+}
+
+
+#start-menu ul { /* Applies to main and submenu lists */
+    list-style: none;
+    margin: 0;
+    padding: 2px; /* Inner padding for items */
+    min-width: 150px; /* Minimum width for main menu */
+}
+
+#start-menu li {
+    padding: 3px 8px 3px 24px; /* Indent for icon space */
+    cursor: pointer;
+    font-size: 12px;
+    position: relative; /* For potential icons */
+    white-space: nowrap;
+    display: block; /* Ensure full width hover */
+}
+/* Add placeholder icon space */
+#start-menu li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: #eee; /* Placeholder icon background */
+    border: 1px solid #aaa;
+}
+
+
+#start-menu li:hover {
+    background-color: #000080; /* Blue highlight */
+    color: #ffffff;
+}
+
+#start-menu li.separator {
+    height: 1px;
+    background-color: #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 4px 0;
+    padding: 0;
+    cursor: default;
+}
+#start-menu li.separator::before {
+    display: none; /* No icon for separator */
+}
+#start-menu li.separator:hover {
+    background-color: #808080; /* No hover effect */
+}
+/* Use CSS variable for start menu item icons */
+#start-menu li::before {
+    background-image: var(--icon-url, none); /* Use variable, default to none */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Fallback style if variable isn't set or image fails */
+    background-color: #eee;
+    border: 1px solid #aaa;
+}
+
+/* Submenu Styling */
+.submenu {
+    position: absolute; /* Position relative to start menu */
+    display: none; /* Hidden by default */
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 1110; /* Above main menu */
+    padding: 0; /* Remove padding, handle internally */
+}
+.submenu ul {
+    min-width: 120px; /* Min width for submenu */
+}
+
+
+/* --- Context Menu --- */
+#context-menu {
+    position: absolute;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 1200; /* Above windows and start menu */
+    display: none; /* Hidden by default */
+    padding: 0; /* Remove padding, handle internally */
+    box-sizing: border-box;
+    user-select: none;
+    min-width: 150px;
+}
+
+#context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 2px; /* Inner padding */
+}
+
+#context-menu li {
+    padding: 3px 8px 3px 8px; /* No icon indent needed for basic menu */
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    display: block; /* Ensure full width hover */
+}
+
+#context-menu li:hover {
+    background-color: #000080; /* Blue highlight */
+    color: #ffffff;
+}
+
+#context-menu li.separator {
+    height: 1px;
+    background-color: #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 4px 0;
+    padding: 0;
+    cursor: default;
+}
+#context-menu li.separator:hover {
+    background-color: #808080; /* No hover effect */
+}

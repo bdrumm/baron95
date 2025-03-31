@@ -1,0 +1,8 @@
+{
+  "id": "weather",
+  "name": "WeatherNET 95",
+  "icon": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='2' width='28' height='28' fill='%23c0c0c0' stroke='%23000'/><circle cx='18' cy='12' r='6' fill='yellow' stroke='orange'/><path d='M8 18h20v8H8z' fill='lightblue'/><path d='M10 20h4v4h-4z M16 20h4v4h-4z M22 20h4v4h-4z' fill='white'/></svg>",
+  "version": "1.0",
+  "description": "Connects to WeatherNET via simulated dial-up to get historical weather data.",
+  "permissions": ["createWindow", "audioPlayback"]
+}

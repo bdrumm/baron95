@@ -1,0 +1,100 @@
+/* Loading Screen Styles */
+.loading-screen {
+    /* Flexbox for centering content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */ /* Remove explicit justification, use padding/margins */
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    background-color: #008080; /* Match desktop teal */
+    color: white; /* Text color */
+    position: fixed; /* Keep it fixed over other content */
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Ensure it's on top */
+    padding: 10vh 20px 0 20px; /* More top padding, less bottom */
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    transition: opacity 0.5s ease-out; /* Fade out transition */
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+
+.loading-logo {
+    width: 320px; /* Adjust as needed */
+    height: 240px; /* Adjust as needed */
+    background-image: url('../assets/startlogo.png'); /* Path relative to CSS file */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px; /* Increase space below logo */
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+/* Styles for the new text container */
+.loading-text-container {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Slightly adjust shadow */
+    margin-bottom: auto; /* Push bar down */
+    flex-shrink: 0;
+}
+
+.loading-text-container .brand {
+    font-size: 2.8em; /* Adjust size */
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 2px;
+}
+
+.loading-text-container .product {
+    font-size: 1.2em; /* Adjust size */
+    vertical-align: super;
+}
+
+.loading-text-container .os-name {
+    font-size: 3.5em; /* Adjust size */
+    font-weight: bold;
+    display: block;
+    margin-top: 0px; /* Adjust spacing */
+}
+
+
+.loading-bar-container {
+    width: 60%; /* Width of the loading bar area */
+    max-width: 300px; /* Max width for larger screens */
+    height: 18px; /* Height of the bar */
+    /* Silver-grey border like Win95 controls */
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080; /* Inner shadow effect */
+    background-color: #c0c0c0; /* Grey background for the container */
+    padding: 2px; /* Padding inside the border */
+    /* margin-top: auto; */ /* Remove margin-top */
+    margin-bottom: 10vh; /* Adjust space from bottom */
+    flex-shrink: 0;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0%; /* Start with 0 width */
+    /* Blue gradient for the loading progress */
+    background: linear-gradient(to right, #000080, #1084d0);
+    /* Link to the 'load' animation */
+    animation: load 3s linear forwards; /* Updated duration to 3s */
+}
+
+/* Loading animation keyframes */
+@keyframes load {
+    0% {
+        width: 0%; /* Start at 0% width */
+     }
+    100% {
+        width: 100%; /* End at 100% width */
+      }
+}
+
+/* Removed .loading-copyright styles */

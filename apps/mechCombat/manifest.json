@@ -1,0 +1,7 @@
+{
+  "name": "Mech Combat 3D",
+  "entry": "app.js",
+  "icon": "Programs/Program.ico",
+  "version": "1.0.0",
+  "description": "A simple 3D WebGL mech combat game."
+}

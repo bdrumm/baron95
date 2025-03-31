@@ -1,0 +1,7 @@
+{
+  "name": "Notepad",
+  "entry": "app.js",
+  "icon": "Notepads & Writing/Notepad.ico",
+  "version": "1.0.0",
+  "description": "A simple text editor."
+}

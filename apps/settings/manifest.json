@@ -1,0 +1,7 @@
+{
+  "name": "Settings",
+  "entry": "app.js",
+  "icon": "Settings/Settings.ico",
+  "version": "1.0.0",
+  "description": "Adjust system settings."
+}
