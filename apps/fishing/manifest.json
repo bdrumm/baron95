@@ -1,0 +1,8 @@
+{
+  "id": "fishing",
+  "name": "Bass Champ 95",
+  "icon": "Programs/Program.ico", 
+  "version": "1.0",
+  "description": "A relaxing fishing simulation.",
+  "permissions": ["createWindow"]
+}

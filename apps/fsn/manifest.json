@@ -1,0 +1,8 @@
+{
+  "id": "fsn",
+  "name": "File System Navigator",
+  "icon": "Folders/Folder.ico", 
+  "version": "0.1",
+  "description": "A 3D file system visualization (Simulated).",
+  "permissions": ["createWindow"]
+}

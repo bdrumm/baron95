@@ -84,7 +84,7 @@
     /* Blue gradient for the loading progress */
     background: linear-gradient(to right, #000080, #1084d0);
     /* Link to the 'load' animation */
-    animation: load 3s linear forwards; /* Updated duration to 3s */
+    animation: load 1s linear forwards; /* Updated duration to 1s */
 }
 
 /* Loading animation keyframes */

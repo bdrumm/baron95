@@ -50,11 +50,34 @@ function createWindow(appInfo) {
     // --- Title Bar ---
     const titleBar = document.createElement('div');
     titleBar.className = 'title-bar';
-    // Create a span for the title text itself to avoid overwriting buttons
+
+    // Container for icon and text
+    const titleTextContainer = document.createElement('div');
+    titleTextContainer.className = 'title-bar-text'; // Use class for styling
+
+    // Icon placeholder
+    const titleIcon = document.createElement('div');
+    titleIcon.className = 'title-bar-icon';
+    // Optionally set specific icon based on appInfo.icon here if needed,
+    // otherwise it uses the CSS default.
+    if (appInfo.icon && appInfo.icon.startsWith('data:image/')) {
+         // Use data URI directly for icon if available
+         titleIcon.style.backgroundImage = `url("${appInfo.icon}")`;
+    } else if (appInfo.icon) {
+         // Construct path for file-based icons
+         const cleanIconName = appInfo.icon.replace(/^\/+|\/+$/g, '');
+         const finalIconPath = `os/ui/icons/${cleanIconName}`;
+         titleIcon.style.backgroundImage = `url("${finalIconPath}")`;
+    } // Else, relies on default CSS background
+
+    // Text content span
     const titleSpan = document.createElement('span');
-    titleSpan.className = 'title-bar-text-content'; // Add class if needed for styling
+    titleSpan.className = 'title-bar-text-content';
     titleSpan.textContent = appInfo.name || 'Untitled';
-    titleBar.appendChild(titleSpan); // Add span first
+
+    titleTextContainer.appendChild(titleIcon);
+    titleTextContainer.appendChild(titleSpan);
+    titleBar.appendChild(titleTextContainer); // Add icon+text container first
 
      // Double click title bar to maximize/restore
      titleBar.addEventListener('dblclick', (e) => {
@@ -71,7 +94,7 @@ function createWindow(appInfo) {
 
     // Minimize Button
     const minimizeButton = document.createElement('button');
-    minimizeButton.innerHTML = '_'; // Use underscore for minimize symbol
+    // minimizeButton.innerHTML = '_'; // Remove text content, use CSS background
     minimizeButton.className = 'window-button minimize-button';
     minimizeButton.title = 'Minimize';
     minimizeButton.onclick = (e) => {
@@ -81,7 +104,7 @@ function createWindow(appInfo) {
 
     // Maximize/Restore Button
     const maximizeButton = document.createElement('button');
-    maximizeButton.innerHTML = '&#9633;'; // Square symbol for maximize
+    // maximizeButton.innerHTML = '&#9633;'; // Remove text content, use CSS background
     maximizeButton.className = 'window-button maximize-button';
     maximizeButton.title = 'Maximize';
     maximizeButton.onclick = (e) => {
@@ -91,7 +114,7 @@ function createWindow(appInfo) {
 
     // Close Button
     const closeButton = document.createElement('button');
-    closeButton.innerHTML = 'X'; // Use X for close symbol
+    // closeButton.innerHTML = 'X'; // Remove text content, use CSS background
     closeButton.className = 'window-button close-button';
     closeButton.title = 'Close';
         closeButton.onclick = (e) => {
@@ -113,7 +136,7 @@ function createWindow(appInfo) {
     buttonsContainer.appendChild(minimizeButton);
     buttonsContainer.appendChild(maximizeButton);
     buttonsContainer.appendChild(closeButton);
-    titleBar.appendChild(buttonsContainer); // Add buttons container after text span
+    titleBar.appendChild(buttonsContainer); // Add buttons container
 
     // --- Content Area ---
     const contentArea = document.createElement('div');
@@ -144,11 +167,11 @@ function createWindow(appInfo) {
 
     // Define a setTitle method for this window instance
     const setTitle = (newTitle) => {
-        // Use the titleSpan we created earlier
+        // Use the specific titleSpan element
         if (titleSpan) {
             titleSpan.textContent = newTitle;
-        } else { // Fallback just in case
-            titleBar.firstChild.textContent = newTitle; // Assume first child is text/span
+        } else { // Fallback should target the container's text if span missing
+            titleTextContainer.textContent = newTitle;
         }
     };
     // Set initial title using the new method
@@ -268,7 +291,7 @@ function toggleMaximizeWindow(windowId) {
         windowEl.style.width = windowEl.dataset.restoreW;
         windowEl.style.height = windowEl.dataset.restoreH;
         windowEl.dataset.isMaximized = 'false';
-        if (maximizeButton) maximizeButton.innerHTML = '&#9633;'; // Maximize symbol
+        // No need to change innerHTML, CSS handles icon via class/attribute
         windowEl.style.transition = 'none'; // Remove transition after restore
         console.log(`Window restored: ${windowId}`);
     } else {
@@ -285,7 +308,7 @@ function toggleMaximizeWindow(windowId) {
         windowEl.style.width = '100%';
         windowEl.style.height = `calc(100% - ${taskbarHeight}px)`;
         windowEl.dataset.isMaximized = 'true';
-        if (maximizeButton) maximizeButton.innerHTML = '&#10697;'; // Restore symbol (two squares)
+        // No need to change innerHTML, CSS handles icon via class/attribute
         console.log(`Window maximized: ${windowId}`);
     }
     focusWindow(windowId); // Ensure it's focused after toggle

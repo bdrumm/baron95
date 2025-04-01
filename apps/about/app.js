@@ -33,17 +33,21 @@ class AboutApp {
     setupDOM() {
         if (!this.contentEl) return; // Guard against missing content element
         this.contentEl.style.padding = '15px';
-        this.contentEl.style.fontFamily = '"Tahoma", "Geneva", sans-serif';
+        this.contentEl.style.fontFamily = 'var(--font-primary)'; // Use variable
         this.contentEl.style.fontSize = '12px';
         this.contentEl.style.textAlign = 'center';
-        this.contentEl.style.backgroundColor = '#c0c0c0'; // Match window background
+        this.contentEl.style.backgroundColor = 'var(--bg-color-window)'; // Use variable
+        this.contentEl.style.color = 'var(--text-color-default)'; // Use variable
+
+        // Define button style using variables
+        const buttonStyle = `style="padding: 3px 15px; border: 1px solid; border-color: var(--border-color-button-outset); box-shadow: 1px 1px 0 var(--shadow-color-button); background-color: var(--bg-color-button); color: var(--text-color-default);"`;
 
         this.contentEl.innerHTML = `
             <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 14px;">Win95 Web Simulation</h2>
             <p>Version 0.1.0</p>
             <p>Created by Cline (AI Software Engineer)</p>
             <p style="margin-top: 20px;">
-                <button id="about-ok-button-${this.appInfo.id}" style="padding: 3px 15px; border: 2px outset #fff; background-color: #c0c0c0;">OK</button>
+                <button id="about-ok-button-${this.appInfo.id}" ${buttonStyle}>OK</button>
             </p>
         `;
 

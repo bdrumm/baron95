@@ -1,0 +1,8 @@
+{
+  "id": "encarta",
+  "name": "Encarta '95",
+  "icon": "Books/Book 4.ico", 
+  "version": "1.0",
+  "description": "Multimedia Encyclopedia (Simulated).",
+  "permissions": ["createWindow"]
+}

@@ -1,12 +1,80 @@
+/* --- CSS Variables for Theming --- */
+:root {
+  --font-primary: "Tahoma", "Geneva", sans-serif;
+  --font-monospace: 'Consolas', 'Courier New', monospace;
+
+  --bg-color-desktop: #008080;
+  --bg-color-window: #c0c0c0;
+  --bg-color-input: #ffffff;
+  --bg-color-title-active: #000080;
+  --bg-color-title-inactive: #808080;
+  --bg-color-button: #c0c0c0;
+  --bg-color-button-active: #b0b0b0;
+  --bg-color-selected: #000080;
+  --bg-color-selected-alpha: rgba(0, 0, 128, 0.5);
+  --bg-color-tooltip: #FFFFE1; /* Light yellow for tooltips/bubbles */
+
+  --text-color-default: #000000;
+  --text-color-light: #ffffff;
+  --text-color-inactive: #c0c0c0;
+  --text-color-disabled: #808080;
+  --text-color-link: green;
+  --text-color-title-active: #ffffff;
+  --text-color-title-inactive: #c0c0c0;
+
+  --border-color-light: #ffffff;
+  --border-color-dark: #808080;
+  --border-color-black: #000000;
+  --border-color-button-outset: var(--border-color-light) var(--border-color-dark) var(--border-color-dark) var(--border-color-light);
+  --border-color-button-inset: var(--border-color-dark) var(--border-color-light) var(--border-color-light) var(--border-color-dark);
+  --border-color-window-content: var(--border-color-dark) var(--border-color-light) var(--border-color-light) var(--border-color-dark);
+  --border-color-groupbox: var(--border-color-dark) var(--border-color-light) var(--border-color-light) var(--border-color-dark);
+  --border-color-statusbar: var(--border-color-dark) var(--border-color-light) var(--border-color-light) var(--border-color-dark);
+
+  --shadow-color-button: #000000;
+  --shadow-color-window: rgba(0,0,0,0.5);
+}
+
+/* --- Dark Mode Overrides --- */
+body.dark-mode {
+  --bg-color-desktop: #202020;
+  --bg-color-window: #404040;
+  --bg-color-input: #303030;
+  --bg-color-title-active: #005080; /* Darker blue */
+  --bg-color-title-inactive: #505050;
+  --bg-color-button: #505050;
+  --bg-color-button-active: #606060;
+  --bg-color-selected: #005080;
+  --bg-color-selected-alpha: rgba(0, 80, 128, 0.6);
+  --bg-color-tooltip: #4a4a31; /* Darker yellow */
+
+  --text-color-default: #e0e0e0;
+  --text-color-light: #f0f0f0;
+  --text-color-inactive: #a0a0a0;
+  --text-color-disabled: #707070;
+  --text-color-link: #66ff66; /* Light green */
+  --text-color-title-active: #ffffff;
+  --text-color-title-inactive: #a0a0a0;
+
+  --border-color-light: #707070;
+  --border-color-dark: #202020;
+  --border-color-black: #101010;
+
+  --shadow-color-button: #000000;
+  --shadow-color-window: rgba(0,0,0,0.7);
+}
+
+
 /* Basic Reset & Body */
 body {
-  font-family: "Tahoma", "Geneva", sans-serif; /* Common Win95 font */
+  font-family: var(--font-primary);
   font-size: 12px;
-  background-color: #008080; /* Win95 Teal */
-  color: #000;
+  background-color: var(--bg-color-desktop);
+  color: var(--text-color-default);
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent scrollbars on body */
+  overflow: hidden;
+  color-scheme: light dark; /* Indicate support for both modes */
 }
 
 #desktop {
@@ -14,10 +82,10 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 30px); /* Full height minus taskbar */
+  height: calc(100% - 30px);
   padding: 10px;
   box-sizing: border-box;
-  user-select: none; /* Prevent selecting desktop text */
+  user-select: none;
 }
 
 /* --- Taskbar --- */
@@ -27,35 +95,48 @@ body {
   left: 0;
   width: 100%;
   height: 30px;
-  background-color: #c0c0c0; /* Win95 Grey */
-  border-top: 2px solid #ffffff; /* White highlight */
-  box-shadow: inset 0 1px 1px #808080; /* Inner shadow */
-  z-index: 1000; /* Ensure taskbar is on top */
+  background-color: var(--bg-color-window);
+  border-top: 1px solid var(--border-color-light);
+  box-shadow: inset 0 1px 1px var(--border-color-dark);
+  z-index: 1000;
   display: flex;
-  align-items: stretch; /* Stretch items vertically */
+  align-items: stretch;
   padding: 2px;
   box-sizing: border-box;
 }
 
 #start-button {
-  background-color: #c0c0c0;
-  border: 2px outset #ffffff;
-  box-shadow: 1px 1px 1px #808080;
+  background-color: var(--bg-color-button);
+  border: 1px solid;
+  border-color: var(--border-color-button-outset);
+  box-shadow: 1px 1px 0px var(--shadow-color-button);
   padding: 0 8px;
   margin: 0 2px;
   cursor: pointer;
   font-size: 12px;
   display: flex;
   align-items: center;
-  font-family: inherit; /* Use body font */
+  font-family: inherit;
+  gap: 4px;
+}
+#start-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../assets/start.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 #start-button b {
-    font-weight: bold; /* Ensure bold */
+    font-weight: bold;
 }
 #start-button:active {
-  border-style: inset;
+  border-color: var(--border-color-button-inset);
   box-shadow: none;
-  background-color: #e0e0e0;
+  background-color: var(--bg-color-button-active);
 }
 
 
@@ -63,15 +144,16 @@ body {
   display: flex;
   height: 100%;
   margin-left: 3px;
-  flex-grow: 1; /* Take up space */
-  overflow: hidden; /* Hide overflowing buttons */
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .taskbar-button {
-  background-color: #c0c0c0;
-  border: 2px outset #ffffff;
-  box-shadow: 1px 1px 1px #808080;
-  padding: 0 8px; /* Adjusted padding */
+  background-color: var(--bg-color-button);
+  border: 1px solid;
+  border-color: var(--border-color-button-outset);
+  box-shadow: 1px 1px 0px var(--shadow-color-button);
+  padding: 0 8px;
   margin: 0 2px;
   height: 100%;
   box-sizing: border-box;
@@ -80,27 +162,28 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
-  min-width: 50px; /* Minimum width */
+  min-width: 50px;
   font-size: 12px;
   display: flex;
   align-items: center;
   text-align: left;
   font-family: inherit;
+  color: var(--text-color-default); /* Ensure text color adapts */
 }
 
 .taskbar-button.minimized,
 .taskbar-button:active {
-  border-style: inset;
-  box-shadow: inset 1px 1px 1px #808080;
-  background-color: #e0e0e0;
-  padding: 1px 7px 0 9px; /* Adjust padding for inset look */
+  border-color: var(--border-color-button-inset);
+  box-shadow: none;
+  background-color: var(--bg-color-button-active);
+  padding: 1px 7px 0 9px;
 }
 
 #system-tray {
-  border: 1px solid #808080; /* Inner border */
-  box-shadow: inset 1px 1px 0 #ffffff; /* Inner highlight */
+  border: 1px solid;
+  border-color: var(--border-color-statusbar);
   padding: 0 5px;
-  margin-left: auto; /* Push to the right */
+  margin-left: auto;
   height: 100%;
   display: flex;
   align-items: center;
@@ -108,106 +191,140 @@ body {
 }
 #clock {
     font-size: 11px;
+    color: var(--text-color-default); /* Ensure clock text adapts */
 }
 
 
 /* --- Windows --- */
 .app-window {
-  background-color: #c0c0c0;
-  border-top: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  min-width: 200px; /* Slightly larger min size */
+  background-color: var(--bg-color-window);
+  border-top: 1px solid var(--border-color-light);
+  border-left: 1px solid var(--border-color-light);
+  border-right: 1px solid var(--border-color-dark);
+  border-bottom: 1px solid var(--border-color-dark);
+  box-shadow: 1px 1px 0px var(--shadow-color-button);
+  padding: 2px;
+  min-width: 200px;
   min-height: 150px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Important for containing content */
+  overflow: hidden;
 }
 
 .title-bar {
-  background: linear-gradient(to right, #000080, #1084d0); /* Win95 Title Gradient */
-  color: #ffffff;
-  padding: 2px 3px; /* Slightly adjust padding */
+  background: var(--bg-color-title-active);
+  color: var(--text-color-title-active);
+  padding: 2px 4px;
   font-weight: bold;
-  font-size: 11px; /* Smaller font for title */
+  font-size: 11px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: move;
-  height: 18px; /* Slightly shorter */
+  height: 18px;
   box-sizing: border-box;
-  flex-shrink: 0; /* Prevent shrinking */
-  user-select: none; /* Prevent selecting title text */
+  flex-shrink: 0;
+  user-select: none;
+  margin-bottom: 1px;
 }
 
 /* Focused window style */
 .app-window.focused > .title-bar {
-   background: linear-gradient(to right, #000080, #1084d0); /* Default blue */
+   background: var(--bg-color-title-active);
+   color: var(--text-color-title-active);
 }
 /* Unfocused window style */
 .app-window:not(.focused) > .title-bar {
-   background: linear-gradient(to right, #808080, #c0c0c0); /* Grey gradient */
-   color: #a0a0a0; /* Dimmer text */
+   background: var(--bg-color-title-inactive);
+   color: var(--text-color-title-inactive);
+}
+.app-window:not(.focused) .title-bar-icon {
+    opacity: 0.7;
+}
+
+.title-bar-text {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.title-bar-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABFSURBVDhPY/wPBAw4AEw/hnH+MzD8z0BfIC4ExJ/B+P8/EgMhQDb8+///+f///w8DIDYgJgPiMwABGAgAADfmAgKqVvJPAAAAAElFTkSuQmCC'); /* Generic placeholder */
+}
+
+.title-bar-text-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
 .title-bar-buttons {
     display: flex;
+    flex-shrink: 0;
 }
 
 .window-button {
-  background-color: #c0c0c0;
-  border: 1px outset #ffffff; /* Use 1px borders for buttons */
-  box-shadow: 1px 1px 0 #808080;
-  font-family: "Tahoma", sans-serif; /* Use standard font for now */
-  font-size: 10px; /* Small buttons */
-  font-weight: bold;
+  background-color: var(--bg-color-button);
+  border: 1px solid;
+  border-color: var(--border-color-button-outset);
+  box-shadow: 1px 1px 0px var(--shadow-color-button);
   width: 16px;
   height: 14px;
   padding: 0;
   margin-left: 2px;
   cursor: pointer;
-  line-height: 12px; /* Adjust line height */
-  text-align: center;
-  display: flex; /* Center content */
-  align-items: center;
-  justify-content: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
-.window-button.close-button {
-    font-weight: bold;
-    font-size: 10px; /* Consistent size */
-    color: #000;
-}
-.window-button.minimize-button {
-    position: relative; /* For positioning underscore */
-    bottom: 1px;
-}
-.window-button.maximize-button {
-    font-size: 8px; /* Smaller square */
-}
+/* Assign background images */
+.window-button.close-button { background-image: url('../assets/close.png'); }
+.window-button.minimize-button { background-image: url('../assets/min.jpg'); }
+.window-button.maximize-button { background-image: url('../assets/max.png'); }
+/* TODO: Need a separate restore icon image and logic to switch */
+/* .app-window[data-is-maximized="true"] .maximize-button { background-image: url('../assets/restore.png'); } */
 
 
 .window-button:active {
-  border-style: inset;
+  border-color: var(--border-color-button-inset);
   box-shadow: none;
-  padding-top: 1px; /* Simulate press */
+  padding-top: 1px;
   padding-left: 1px;
 }
 
 .window-content {
   flex-grow: 1;
-  background-color: #ffffff; /* Default white content area */
-  margin: 0; /* Remove margin */
-  border: 2px inset #ffffff; /* Sunken border */
-  box-shadow: inset 1px 1px 0 #808080;
-  overflow: auto; /* Allow scrolling */
-  /* Remove padding, let app content decide */
-  /* padding: 5px; */
+  background-color: var(--bg-color-window); /* Use window bg as default */
+  color: var(--text-color-default); /* Ensure content text color adapts */
+  margin: 0;
+  border: 1px solid;
+  border-color: var(--border-color-window-content);
+  overflow: auto;
+  padding: 0; /* Remove default padding, apps should manage */
   box-sizing: border-box;
-  position: relative; /* Needed for absolute positioning inside if required by app */
+  position: relative;
 }
+/* Specific app content areas might override background */
+body:not(.dark-mode) #notepad-textarea, /* Example for specific app */
+body:not(.dark-mode) .encarta-main-area > div { /* Example for Encarta panels */
+    background-color: #ffffff; /* White background for content in light mode */
+}
+body.dark-mode #notepad-textarea,
+body.dark-mode .encarta-main-area > div {
+    background-color: var(--bg-color-input); /* Dark input background in dark mode */
+    color: var(--text-color-default);
+}
+
 
 /* Resize Handle */
 .resize-handle {
@@ -216,143 +333,144 @@ body {
   right: 0;
   width: 16px;
   height: 16px;
-  background-color: #c0c0c0; /* Match window background */
-  /* Create a grip pattern using borders or background image */
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
-  cursor: nwse-resize; /* Diagonal resize cursor */
-  z-index: 1; /* Above content but below title bar buttons if overlapping */
+  background-color: var(--bg-color-window); /* Match window */
+  border-top: 1px solid var(--border-color-light);
+  border-left: 1px solid var(--border-color-light);
+  border-bottom: 1px solid var(--border-color-dark);
+  border-right: 1px solid var(--border-color-dark);
+  cursor: nwse-resize;
+  z-index: 1;
 }
 /* Hide resize handle when maximized */
-.app-window[data-is-maximized="true"] .resize-handle {
-    display: none;
-}
+.app-window[data-is-maximized="true"] .resize-handle { display: none; }
 /* Adjust window border/shadow when maximized */
-.app-window[data-is-maximized="true"] {
-    border: none;
-    box-shadow: none;
-}
+.app-window[data-is-maximized="true"] { border: none; box-shadow: none; }
 
 
 /* --- Desktop Icons --- */
 .desktop-icon {
   width: 75px;
-  /* min-height: 70px; */ /* Remove min-height */
-  color: #ffffff;
+  /* min-height: 70px; */
+  color: var(--text-color-light); /* Desktop icon text is usually light */
   text-align: center;
   margin: 10px;
-  display: inline-flex; /* Use flex for better alignment */
-  flex-direction: column; /* Stack image and label */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  /* gap: 4px; */ /* Remove explicit gap */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  font-size: 11px; /* Slightly smaller font */
-  padding: 2px; /* Revert to minimal padding */
+  font-size: 11px;
+  padding: 2px;
   box-sizing: border-box;
-  border: 1px solid transparent; /* For focus/selection later */
+  border: 1px solid transparent;
 }
+/* Dark mode desktop icon text */
+body.dark-mode .desktop-icon {
+    color: var(--text-color-default); /* Use default text color for dark mode */
+    text-shadow: none; /* Remove shadow which assumes light text */
+}
+
 
 .desktop-icon:hover {
    /* Add hover effect later if desired */
 }
 
 .desktop-icon:focus,
-.desktop-icon.selected { /* Style for selection */
-  background-color: rgba(0, 0, 128, 0.5); /* Semi-transparent blue */
-  border: 1px dotted #ffffff;
+.desktop-icon.selected {
+  background-color: var(--bg-color-selected-alpha); /* Use variable */
+  border: 1px dotted var(--border-color-light); /* Use variable */
   outline: none;
 }
 
-.desktop-icon .icon-image { /* Placeholder for actual image */
-  width: 100%; /* Standard icon size */
+.desktop-icon .icon-image {
+  width: 100%;
   height: 32px;
-  /* Remove placeholder background/border for transparency */
-  /* background-color: #ccc; */
-  /* border: 1px solid #aaa; */
-  /* margin-bottom: 4px; */ /* Ensure margin is removed */
-  background-size: contain; /* Keep image contained */
+  background-size: contain;
   background-repeat: no-repeat;
-  flex-shrink: 0; /* Prevent image shrinking */
-  background-position: center; /* Center image within the div */
-  image-rendering: pixelated; /* Preserve crisp edges for pixel art icons */
+  flex-shrink: 0;
+  background-position: center;
+  image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
 
 .desktop-icon .icon-label {
-  text-align: center; /* Ensure label text is centered */
-  background-color: transparent; /* Label background */
+  text-align: center;
+  background-color: transparent;
   padding: 1px 3px;
-  margin-top: 4px; /* Add explicit top margin */
-  word-wrap: break-word; /* Allow wrapping */
-  max-height: 2.4em; /* Limit label height */
+  margin-top: 4px;
+  word-wrap: break-word;
+  max-height: 2.4em;
   line-height: 1.2em;
 }
 
 /* Style for selected label text */
 .desktop-icon:focus .icon-label,
 .desktop-icon.selected .icon-label {
-   background-color: #000080; /* Blue background when selected */
-   color: #ffffff;
+   background-color: var(--bg-color-selected); /* Use variable */
+   color: var(--text-color-light); /* Use variable */
+}
+/* Ensure selected text is readable in dark mode */
+body.dark-mode .desktop-icon:focus .icon-label,
+body.dark-mode .desktop-icon.selected .icon-label {
+    color: var(--text-color-light); /* Keep selected text light */
 }
 
 
 /* --- Start Menu --- */
 #start-menu {
     position: absolute;
-    bottom: 30px; /* Position above taskbar */
+    bottom: 30px;
     left: 0;
-    /* width: 180px; /* Let content determine width */
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 1100; /* Above taskbar */
-    display: none; /* Hidden by default */
-    flex-direction: row; /* Layout sidebar and main */
-    padding: 0; /* Remove padding, handle internally */
+    background-color: var(--bg-color-window); /* Use variable */
+    border: 1px solid; /* Use variables for 3D effect */
+    border-color: var(--border-color-light) var(--border-color-dark) var(--border-color-dark) var(--border-color-light);
+    box-shadow: 1px 1px 0px var(--shadow-color-button); /* Use variable */
+    z-index: 1100;
+    display: none;
+    flex-direction: row;
+    padding: 2px; /* Add padding */
     box-sizing: border-box;
     user-select: none;
 }
 
 .start-menu-sidebar {
-    width: 24px; /* Width for vertical text */
-    background-color: #808080; /* Darker grey */
-    writing-mode: vertical-lr; /* Vertical text */
-    transform: rotate(180deg); /* Flip text direction */
+    width: 24px;
+    background-color: var(--border-color-dark); /* Use dark border color */
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
     text-align: center;
     padding: 10px 0;
     font-weight: bold;
-    color: #c0c0c0; /* Light grey text */
-    border-right: 2px solid #000; /* Separator */
-    box-shadow: inset -1px 0 0 #fff;
-    font-size: 16px; /* Larger text */
-    /* Placeholder text */
+    color: var(--bg-color-window); /* Use window bg color for text */
+    border-right: 1px solid var(--border-color-black); /* Use variable */
+    box-shadow: inset -1px 0 0 var(--border-color-light); /* Use variable */
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 .start-menu-sidebar::before {
-    content: "Win95 Sim"; /* Example text */
+    content: "Win95 Sim";
 }
 
 
-#start-menu ul { /* Applies to main and submenu lists */
+#start-menu ul {
     list-style: none;
     margin: 0;
-    padding: 2px; /* Inner padding for items */
-    min-width: 150px; /* Minimum width for main menu */
+    padding: 2px;
+    min-width: 150px;
 }
 
 #start-menu li {
-    padding: 3px 8px 3px 24px; /* Indent for icon space */
+    padding: 3px 8px 3px 24px;
     cursor: pointer;
     font-size: 12px;
-    position: relative; /* For potential icons */
+    position: relative;
     white-space: nowrap;
-    display: block; /* Ensure full width hover */
+    display: block;
+    color: var(--text-color-default); /* Use variable */
 }
 /* Add placeholder icon space */
 #start-menu li::before {
@@ -363,65 +481,67 @@ body {
     transform: translateY(-50%);
     width: 16px;
     height: 16px;
-    background-color: #eee; /* Placeholder icon background */
-    border: 1px solid #aaa;
+    background-color: #eee; /* Keep placeholder light */
+    border: 1px solid var(--border-color-dark); /* Use variable */
+}
+/* Dark mode placeholder */
+body.dark-mode #start-menu li::before {
+    background-color: #555;
+    border-color: var(--border-color-light);
 }
 
 
 #start-menu li:hover {
-    background-color: #000080; /* Blue highlight */
-    color: #ffffff;
+    background-color: var(--bg-color-selected); /* Use variable */
+    color: var(--text-color-light); /* Use variable */
 }
 
 #start-menu li.separator {
     height: 1px;
-    background-color: #808080;
-    border-bottom: 1px solid #ffffff;
+    background-color: var(--border-color-dark); /* Use variable */
+    border-bottom: 1px solid var(--border-color-light); /* Use variable */
     margin: 4px 0;
     padding: 0;
     cursor: default;
 }
-#start-menu li.separator::before {
-    display: none; /* No icon for separator */
-}
-#start-menu li.separator:hover {
-    background-color: #808080; /* No hover effect */
-}
+#start-menu li.separator::before { display: none; }
+#start-menu li.separator:hover { background-color: var(--border-color-dark); }
+
 /* Use CSS variable for start menu item icons */
 #start-menu li::before {
-    background-image: var(--icon-url, none); /* Use variable, default to none */
+    background-image: var(--icon-url, none);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     /* Fallback style if variable isn't set or image fails */
-    background-color: #eee;
-    border: 1px solid #aaa;
+    /* background-color: #eee; */ /* Handled above */
+    /* border: 1px solid #aaa; */ /* Handled above */
 }
 
 /* Submenu Styling */
 .submenu {
-    position: absolute; /* Position relative to start menu */
-    display: none; /* Hidden by default */
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 1110; /* Above main menu */
-    padding: 0; /* Remove padding, handle internally */
+    position: absolute;
+    display: none;
+    background-color: var(--bg-color-window); /* Use variable */
+    border: 1px solid; /* Use variables */
+    border-color: var(--border-color-light) var(--border-color-dark) var(--border-color-dark) var(--border-color-light);
+    box-shadow: 1px 1px 0px var(--shadow-color-button); /* Use variable */
+    z-index: 1110;
+    padding: 2px; /* Add padding */
 }
-.submenu ul {
-    min-width: 120px; /* Min width for submenu */
-}
+.submenu ul { min-width: 120px; }
 
 
 /* --- Context Menu --- */
 #context-menu {
     position: absolute;
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 1200; /* Above windows and start menu */
-    display: none; /* Hidden by default */
-    padding: 0; /* Remove padding, handle internally */
+    background-color: var(--bg-color-window); /* Use variable */
+    border: 1px solid; /* Use variables */
+    border-color: var(--border-color-light) var(--border-color-dark) var(--border-color-dark) var(--border-color-light);
+    box-shadow: 1px 1px 0px var(--shadow-color-button); /* Use variable */
+    z-index: 1200;
+    display: none;
+    padding: 2px; /* Add padding */
     box-sizing: border-box;
     user-select: none;
     min-width: 150px;
@@ -430,30 +550,29 @@ body {
 #context-menu ul {
     list-style: none;
     margin: 0;
-    padding: 2px; /* Inner padding */
+    padding: 2px;
 }
 
 #context-menu li {
-    padding: 3px 8px 3px 8px; /* No icon indent needed for basic menu */
+    padding: 3px 8px 3px 8px;
     cursor: pointer;
     font-size: 12px;
     white-space: nowrap;
-    display: block; /* Ensure full width hover */
+    display: block;
+    color: var(--text-color-default); /* Use variable */
 }
 
 #context-menu li:hover {
-    background-color: #000080; /* Blue highlight */
-    color: #ffffff;
+    background-color: var(--bg-color-selected); /* Use variable */
+    color: var(--text-color-light); /* Use variable */
 }
 
 #context-menu li.separator {
     height: 1px;
-    background-color: #808080;
-    border-bottom: 1px solid #ffffff;
+    background-color: var(--border-color-dark); /* Use variable */
+    border-bottom: 1px solid var(--border-color-light); /* Use variable */
     margin: 4px 0;
     padding: 0;
     cursor: default;
 }
-#context-menu li.separator:hover {
-    background-color: #808080; /* No hover effect */
-}
+#context-menu li.separator:hover { background-color: var(--border-color-dark); }

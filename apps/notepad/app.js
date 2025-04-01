@@ -32,12 +32,16 @@ class NotepadApp {
         this.textarea = document.createElement('textarea');
         this.textarea.style.width = '100%';
         this.textarea.style.height = '100%';
-        this.textarea.style.border = 'none';
-        this.textarea.style.resize = 'none'; // Disable browser textarea resize handle
-        this.textarea.style.fontFamily = '"Courier New", Courier, monospace'; // Classic fixed-width font
+        this.textarea.style.border = 'none'; // Remove border, rely on parent .window-content
+        this.textarea.style.resize = 'none';
+        this.textarea.style.fontFamily = 'var(--font-monospace)'; // Use variable
         this.textarea.style.fontSize = '13px';
         this.textarea.style.boxSizing = 'border-box';
-        this.textarea.style.outline = 'none'; // Remove focus outline
+        this.textarea.style.outline = 'none';
+        this.textarea.style.backgroundColor = 'var(--bg-color-input)'; // Use variable
+        this.textarea.style.color = 'var(--text-color-default)'; // Use variable
+        // Add padding within textarea instead of on contentEl
+        this.textarea.style.padding = '2px 4px';
 
         this.contentEl.appendChild(this.textarea);
 

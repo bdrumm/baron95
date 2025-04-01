@@ -1,0 +1,8 @@
+{
+  "id": "calculator",
+  "name": "Calculator",
+  "icon": "Devices/Calculator.ico",
+  "version": "1.0",
+  "description": "A simple calculator.",
+  "permissions": ["createWindow"]
+}

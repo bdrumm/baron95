@@ -69,29 +69,40 @@ class WeatherApp {
         const styleSheet = document.createElement('style');
         styleSheet.id = styleId;
         styleSheet.textContent = `
-            #weather-app-container { height: 100%; display: flex; flex-direction: column; }
+            #weather-app-container { height: 100%; display: flex; flex-direction: column; background-color: var(--bg-color-window); color: var(--text-color-default); }
             #connection-status { display: flex; align-items: flex-start; padding: 15px 10px; margin-bottom: 10px; border: none; background: none; }
             #connection-icon-area { width: 64px; height: 64px; margin-right: 15px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-            #connection-icon-area svg { width: 100%; height: 100%; }
+            #connection-icon-area svg rect[fill="#C0C0C0"] { fill: var(--bg-color-window); } /* Update SVG colors */
+            #connection-icon-area svg rect[fill="#FFF"] { fill: var(--bg-color-input); }
+            #connection-icon-area svg rect[stroke="#808080"] { stroke: var(--border-color-dark); }
+            #connection-icon-area svg circle[fill="#808080"] { fill: var(--border-color-dark); }
+            #connection-icon-area svg g[stroke="#000080"] line { stroke: var(--bg-color-title-active); }
+            #connection-icon-area svg g[stroke="#0000FF"] path { stroke: blue; } /* Keep waves blue */
             #connection-details-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; min-height: 64px; }
             #connection-text-area { margin-bottom: 10px; }
-            #connection-status-line, #connected-info p { margin: 3px 0; font-family: 'Tahoma', 'MS Sans Serif', 'Arial', sans-serif; font-size: 11px; }
+            #connection-status-line, #connected-info p { margin: 3px 0; font-family: var(--font-primary); font-size: 11px; }
             #connected-info { display: none; }
             #connection-button-area { align-self: flex-end; display: flex; gap: 5px; }
             #disconnect-button, #details-button { display: none; }
+            /* Ensure buttons inherit general styles */
+            #connection-button-area button { font-family: var(--font-primary); font-size: 11px; }
+
             #weather-display { display: none; flex-grow: 1; padding-top: 10px; }
-            #weather-display h2 { margin-top: 0; font-size: 13px; border-bottom: 1px dotted #808080; padding-bottom: 5px; margin-bottom: 10px; display: flex; align-items: center; }
+            #weather-display h2 { margin-top: 0; font-size: 13px; border-bottom: 1px dotted var(--border-color-dark); padding-bottom: 5px; margin-bottom: 10px; display: flex; align-items: center; }
             .weather-icon { width: 24px; height: 24px; margin-right: 8px; }
             #weather-display p { margin: 8px 0; font-size: 11px; }
-            .status-bar { display: flex; border-top: 1px solid #808080; margin-top: 10px; } /* Simplified status bar */
-            .status-bar-field { flex: 1; margin: 0 1px; padding: 1px 4px; border: 1px solid; border-color: #808080 #ffffff #ffffff #808080; font-size: 11px; line-height: 16px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 50px; background: #c0c0c0; }
-            .notice { font-size: 10px; color: #404040; margin-top: 15px; text-align: center; }
-            .error-notice { color: #8B0000; font-weight: bold; }
-            .main-status { height: 20px; box-sizing: border-box; border: 1px solid; border-color: #808080 #ffffff #ffffff #808080; padding: 1px 2px; display: flex; background-color: #C0C0C0; margin-top: auto; /* Push to bottom */ }
-            .main-status .status-bar-field { border: none; background: none; padding: 0 4px; } /* Simpler main status */
+            .status-bar { display: flex; border-top: 1px solid var(--border-color-dark); margin-top: 10px; }
+            .status-bar-field { flex: 1; margin: 0 1px; padding: 1px 4px; border: 1px solid; border-color: var(--border-color-statusbar); font-size: 11px; line-height: 16px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; min-width: 50px; background: var(--bg-color-window); }
+            .notice { font-size: 10px; color: var(--text-color-disabled); margin-top: 15px; text-align: center; }
+            .error-notice { color: #8B0000; font-weight: bold; } /* Keep error red */
+            .main-status { height: 20px; box-sizing: border-box; border: 1px solid; border-color: var(--border-color-statusbar); padding: 1px 2px; display: flex; background-color: var(--bg-color-window); margin-top: auto; /* Push to bottom */ }
+            .main-status .status-bar-field { border: none; background: none; padding: 0 4px; }
+            /* Update focus style if needed, maybe use outline */
             .details-button:focus {
-                box-shadow: 1px 1px 0px 1px #000000, inset 0 0 0 1px #C0C0C0, inset 1px 1px 0 1px #000;
-                border: 1px dotted #000; outline: none; padding: 3px 12px;
+                 outline: 1px dotted var(--text-color-default);
+                 outline-offset: -3px;
+                 /* box-shadow: 1px 1px 0px 1px #000000, inset 0 0 0 1px #C0C0C0, inset 1px 1px 0 1px #000; */
+                 /* border: 1px dotted #000; outline: none; padding: 3px 12px; */
             }
         `;
         document.head.appendChild(styleSheet);

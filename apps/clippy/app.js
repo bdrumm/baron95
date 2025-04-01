@@ -109,7 +109,8 @@ class ClippyApp {
                 align-items: center;
                 padding: 5px;
                 box-sizing: border-box;
-                background-color: #c0c0c0;
+                background-color: var(--bg-color-window); /* Use variable */
+                color: var(--text-color-default); /* Use variable */
             }
             .clippy-image {
                 width: 64px;
@@ -122,8 +123,9 @@ class ClippyApp {
                 flex-shrink: 0;
             }
             .clippy-bubble {
-                background-color: #FFFFE1;
-                border: 1px solid #000;
+                background-color: var(--bg-color-tooltip); /* Use variable */
+                border: 1px solid var(--border-color-black); /* Use variable */
+                color: var(--text-color-default); /* Use variable */
                 padding: 8px;
                 border-radius: 5px;
                 font-size: 11px;
@@ -136,13 +138,18 @@ class ClippyApp {
             .clippy-options { text-align: right; }
             .clippy-options button {
                  font-size: 10px; padding: 1px 5px; margin-left: 5px;
-                 background-color: #C0C0C0; border: 1px solid;
-                 border-color: #ffffff #808080 #808080 #ffffff;
-                 box-shadow: 1px 1px 0px 1px #000000; cursor: pointer;
+                 background-color: var(--bg-color-button); /* Use variable */
+                 color: var(--text-color-default); /* Use variable */
+                 border: 1px solid;
+                 border-color: var(--border-color-button-outset); /* Use variable */
+                 box-shadow: 1px 1px 0px var(--shadow-color-button); /* Use variable */
+                 cursor: pointer;
             }
              .clippy-options button:active {
-                 border-color: #808080 #ffffff #ffffff #808080; box-shadow: none;
-                 background-color: #e0e0e0; padding: 2px 4px 0px 6px;
+                 border-color: var(--border-color-button-inset); /* Use variable */
+                 box-shadow: none;
+                 background-color: var(--bg-color-button-active); /* Use variable */
+                 padding: 2px 4px 0px 6px;
              }
             /* Chat Interface Styles */
             .clippy-chat-interface {
@@ -150,10 +157,11 @@ class ClippyApp {
                 flex-direction: column;
                 flex-grow: 1; /* Take remaining space */
                 width: 100%;
-                overflow: hidden; /* Prevent overflow */
-                border: 1px inset #fff; /* Sunken border */
-                box-shadow: inset 1px 1px 0 #808080;
-                background-color: #fff; /* White background */
+                overflow: hidden;
+                border: 1px solid; /* Use variable */
+                border-color: var(--border-color-window-content); /* Use variable */
+                /* box-shadow: inset 1px 1px 0 #808080; */ /* Replaced by border */
+                background-color: var(--bg-color-input); /* Use variable */
             }
             .clippy-chat-history {
                 flex-grow: 1;
@@ -161,34 +169,43 @@ class ClippyApp {
                 padding: 5px;
                 font-size: 11px;
                 line-height: 1.3;
+                color: var(--text-color-default); /* Use variable */
             }
             .clippy-chat-history p { margin: 0 0 5px 0; }
-            .clippy-chat-history .user-message { color: blue; text-align: right; }
-            .clippy-chat-history .assistant-message { color: black; }
+            .clippy-chat-history .user-message { color: blue; text-align: right; } /* Keep user blue */
+            .clippy-chat-history .assistant-message { color: var(--text-color-default); } /* Use variable */
             .clippy-chat-input-area {
                 display: flex;
-                border-top: 1px solid #808080;
+                border-top: 1px solid var(--border-color-dark); /* Use variable */
                 padding: 3px;
-                background-color: #c0c0c0;
+                background-color: var(--bg-color-window); /* Use variable */
             }
             .clippy-chat-input {
                 flex-grow: 1;
-                border: 1px solid #808080;
-                box-shadow: inset 1px 1px 0 #000;
+                border: 1px solid; /* Use variable */
+                border-color: var(--border-color-dark) var(--border-color-light) var(--border-color-light) var(--border-color-dark); /* Sunken */
+                /* box-shadow: inset 1px 1px 0 #000; */ /* Replaced by border */
                 padding: 2px 4px;
                 font-size: 11px;
                 margin-right: 3px;
+                background-color: var(--bg-color-input); /* Use variable */
+                color: var(--text-color-default); /* Use variable */
             }
             .clippy-send-button {
                  font-size: 10px; padding: 1px 5px;
-                 background-color: #C0C0C0; border: 1px solid;
-                 border-color: #ffffff #808080 #808080 #ffffff;
-                 box-shadow: 1px 1px 0px 1px #000000; cursor: pointer;
+                 background-color: var(--bg-color-button); /* Use variable */
+                 color: var(--text-color-default); /* Use variable */
+                 border: 1px solid;
+                 border-color: var(--border-color-button-outset); /* Use variable */
+                 box-shadow: 1px 1px 0px var(--shadow-color-button); /* Use variable */
+                 cursor: pointer;
                  flex-shrink: 0;
             }
              .clippy-send-button:active {
-                 border-color: #808080 #ffffff #ffffff #808080; box-shadow: none;
-                 background-color: #e0e0e0; padding: 2px 4px 0px 6px;
+                 border-color: var(--border-color-button-inset); /* Use variable */
+                 box-shadow: none;
+                 background-color: var(--bg-color-button-active); /* Use variable */
+                 padding: 2px 4px 0px 6px;
              }
         `;
         document.head.appendChild(styleSheet);

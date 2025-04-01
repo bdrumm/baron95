@@ -54,6 +54,9 @@ class OperatingSystem {
     async boot() {
         console.log("OS Booting...");
 
+        // Apply theme preference early
+        this.applySavedTheme();
+
         // Initialize core components
         this.windowManager = initializeWindowManager(this); // Pass OS ref if needed by WM
         this.desktop = initializeDesktop(this);
@@ -88,14 +91,14 @@ class OperatingSystem {
                 // Optional: Remove the element completely after transition
                 // loadingScreen.addEventListener('transitionend', () => loadingScreen.remove());
             }
-        }, 3000); // Updated delay to 3 seconds (3000 ms)
+        }, 1000); // Updated delay to 1 second (1000 ms)
     }
 
     async discoverApps() {
         // In a real scenario, this might scan the /apps directory using a server-side
         // endpoint or a build step that generates a list.
         // For now, we'll hardcode the known app directories.
-        const appDirs = ['mechCombat', 'notepad', 'settings', 'about', 'weather', 'clippy']; // Added 'clippy'
+        const appDirs = ['mechCombat', 'notepad', 'settings', 'about', 'weather', 'clippy', 'fishing', 'calculator', 'encarta', 'fsn']; // Added 'fsn'
 
         for (const dir of appDirs) {
             const appManifestUrl = `../apps/${dir}/manifest.json`;
@@ -245,6 +248,16 @@ class OperatingSystem {
 
         } else {
             console.warn(`[OS Core] notifyAppClosed called but app instance or info for ${appId} not found in runningApps.`);
+        }
+    }
+
+    applySavedTheme() {
+        const savedTheme = localStorage.getItem('darkMode');
+        if (savedTheme === 'enabled') {
+            document.body.classList.add('dark-mode');
+            console.log("[OS Core] Applied saved dark mode theme.");
+        } else {
+            document.body.classList.remove('dark-mode'); // Ensure light mode if not explicitly enabled
         }
     }
 
