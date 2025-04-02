@@ -1,3 +1,3 @@
-title: Windows 95 Simulator
-description: A Windows 95 simulator in the browser
-theme: jekyll-theme-minimal
+baseurl: /baron95
+url: https://bdrumm.github.io
+exclude: [.gitignore, README.md]
