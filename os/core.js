@@ -101,7 +101,7 @@ class OperatingSystem {
         const appDirs = ['mechCombat', 'notepad', 'settings', 'about', 'weather', 'clippy', 'fishing', 'calculator', 'encarta', 'fsn']; // Added 'fsn'
 
         for (const dir of appDirs) {
-            const appManifestUrl = `../apps/${dir}/manifest.json`;
+            const appManifestUrl = `apps/${dir}/manifest.json`;
             try {
                 const response = await fetch(appManifestUrl);
                 if (!response.ok) {
@@ -109,7 +109,7 @@ class OperatingSystem {
                 }
                 const manifest = await response.json();
                 const appId = dir; // Use directory name as the app ID
-                this.apps[appId] = { ...manifest, id: appId, path: `../apps/${appId}/` };
+                this.apps[appId] = { ...manifest, id: appId, path: `apps/${appId}/` };
                 console.log(`Discovered App: ${manifest.name} (ID: ${appId})`);
             } catch (error) {
                 console.error(`Error discovering app (${appManifestUrl}):`, error);
