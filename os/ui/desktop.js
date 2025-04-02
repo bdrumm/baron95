@@ -28,6 +28,12 @@ function initializeDesktop(os) {
         }
     });
 
+    // Add version number display
+    const versionElement = document.createElement('div');
+    versionElement.id = 'desktop-version';
+    versionElement.textContent = 'v0.1.0'; // Placeholder version
+    desktopElement.appendChild(versionElement);
+
 
     return {
         renderIcons,

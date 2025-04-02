@@ -576,3 +576,21 @@ body.dark-mode #start-menu li::before {
     cursor: default;
 }
 #context-menu li.separator:hover { background-color: var(--border-color-dark); }
+
+/* --- Desktop Version --- */
+#desktop-version {
+    position: absolute;
+    bottom: 40px; /* Moved up significantly */
+    right: 10px; /* Small padding from the right edge */
+    font-size: 10px;
+    color: var(--text-color-light); /* Light text for default theme */
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /* Subtle shadow */
+    user-select: none;
+    z-index: 5; /* Increased z-index */
+}
+
+/* Adjust color for dark mode if needed */
+body.dark-mode #desktop-version {
+    color: var(--text-color-default); /* Use default text color in dark mode */
+    text-shadow: none;
+}

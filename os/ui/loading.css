@@ -98,3 +98,15 @@
 }
 
 /* Removed .loading-copyright styles */
+
+/* Style for the loading screen version number */
+#loading-version {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em; /* Slightly smaller than default */
+    color: #c0c0c0; /* Light grey color */
+    margin-top: 15px; /* Space above the version number */
+    margin-bottom: 5vh; /* Space below the version number */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    flex-shrink: 0;
+}

@@ -158,7 +158,8 @@ class OperatingSystem {
 
         // Determine the script URL (default to app.js if entry is not specified)
         const entryScript = appInfo.entry || 'app.js';
-        const appScriptUrl = `${appInfo.path}${entryScript}`;
+        // Construct absolute URL relative to the document's base URI for dynamic import()
+        const appScriptUrl = new URL(`${appInfo.path}${entryScript}`, document.baseURI).href;
 
         try {
             console.log(`[OS Core] Attempting to import module: ${appScriptUrl}`);
